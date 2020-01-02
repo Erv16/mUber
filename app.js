@@ -1,14 +1,15 @@
 const express = require('express');
 const routes = require('./routes/routes');
 const bodyParser = require('body-parser');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 //object that will take incoming http request and depending
 //on information or routing it is going run a certain amount of code
 
-// mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://loclahost/muber');
-
 const app = express();
+
+// Fix deprecation warning
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/muber', { useNewUrlParser: true });
 
 // To wire up the middleware to the express application
 // json() - assume it is json and parse it into an object
