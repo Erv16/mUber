@@ -51,6 +51,8 @@ describe('Drivers controller', () => {
   it('DELETE to /api/drivers/id can delete a driver', done => {
     const driver = new Driver({ email: 'driver@drive.com' });
 
+    // First check to see if the driver is present in the collection
+    // If so then verify if the driver is removed/deleted
     driver.save().then(() => {
       Driver.findById(driver._id).then(driver => {
         assert(driver.email === 'driver@drive.com');
