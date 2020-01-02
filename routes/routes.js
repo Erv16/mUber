@@ -15,4 +15,7 @@ module.exports = app => {
 
   // Route for deleting an existing driver
   app.delete('/api/drivers/:id', DriversController.delete);
+
+  //
+  app.get('/api/drivers', DriversController.index);
 };

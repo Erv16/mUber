@@ -16,10 +16,14 @@ before(done => {
 // The catch() also has a done method as the first time
 // the database runs, there is nothing in it and it will
 // result into an error, hence to avoid this
+// @ensureIndex makes sure that before any of the tests are run
+// the geometry.coordinates property is set and available on the
+// drivers collection
 beforeEach(done => {
   const { drivers } = mongoose.connection.collections;
   drivers
     .drop()
+    .then(() => drivers.ensureIndex({ 'geometry.coordinates': '2dsphere' }))
     .then(() => done())
     .catch(() => done());
 });
