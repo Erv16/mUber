@@ -11,7 +11,8 @@ const app = express();
 mongoose.Promise = global.Promise;
 if (process.env.NODE_ENV !== 'test') {
   mongoose.connect('mongodb://localhost:27017/muber', {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
   });
 }
 

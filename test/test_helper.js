@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 // Created a seperate database for the test environment
 before(done => {
   mongoose.connect('mongodb://localhost/muber_test', {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
   });
   mongoose.connection
     .once('open', () => done())
