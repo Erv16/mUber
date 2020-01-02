@@ -9,7 +9,11 @@ const app = express();
 
 // Fix deprecation warning
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/muber', { useNewUrlParser: true });
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect('mongodb://localhost:27017/muber', {
+    useNewUrlParser: true
+  });
+}
 
 // To wire up the middleware to the express application
 // json() - assume it is json and parse it into an object
