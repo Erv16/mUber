@@ -28,6 +28,8 @@ describe('Drivers controller', () => {
     });
   });
 
+  // test for updating an existing driver
+
   // end - sends the req off stating no further customization left
   // to do
   it('Put to /api/drivers/id edits an existing driver', done => {
@@ -42,6 +44,25 @@ describe('Drivers controller', () => {
             done();
           });
         });
+    });
+  });
+
+  // test for deleting an existing driver
+  it('DELETE to /api/drivers/id can delete a driver', done => {
+    const driver = new Driver({ email: 'driver@drive.com' });
+
+    driver.save().then(() => {
+      Driver.findById(driver._id).then(driver => {
+        assert(driver.email === 'driver@drive.com');
+        request(app)
+          .delete(`/api/drivers/${driver._id}`)
+          .end(() => {
+            Driver.findById(driver._id).then(driver => {
+              assert(driver === null);
+              done();
+            });
+          });
+      });
     });
   });
 });

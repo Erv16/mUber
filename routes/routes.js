@@ -12,4 +12,7 @@ module.exports = app => {
 
   // Route for updating an existing driver
   app.put('/api/drivers/:id', DriversController.edit);
+
+  // Route for deleting an existing driver
+  app.delete('/api/drivers/:id', DriversController.delete);
 };
