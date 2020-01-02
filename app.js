@@ -19,6 +19,16 @@ if (process.env.NODE_ENV !== 'test') {
 // json() - assume it is json and parse it into an object
 // Should be placed above the routes call
 app.use(bodyParser.json());
+// Setup all the routes of the application
 routes(app);
+
+// Error handler middleware
+// @err - will be populated if the prev middleware threw an error
+// @req - incoming req obj
+// @res - outgoing res obj
+// @next - function to execute the next middleware in the chain
+app.use((err, req, res, next) => {
+  res.status(422).send({ error: err.message });
+});
 
 module.exports = app;

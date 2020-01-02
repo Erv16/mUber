@@ -12,6 +12,9 @@ before(done => {
     });
 });
 
+// The catch() also has a done method as the first time
+// the database runs, there is nothing in it and it will
+// result into an error, hence to avoid this
 beforeEach(done => {
   const { drivers } = mongoose.connection.collections;
   drivers
